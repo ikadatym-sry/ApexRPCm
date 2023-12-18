@@ -4,6 +4,14 @@ Lobby            |  In-Match
 :-------------------------:|:-------------------------:
 ![](https://user-images.githubusercontent.com/32639831/143062717-b1a8debc-d661-4baa-99d7-320571dd7fef.png)  |  ![](https://user-images.githubusercontent.com/32639831/143062754-fe1106da-a5a0-4393-b336-5b77b74f87cc.png)
 
+# To Compile this project
+- Download or clone or something that you can get this project from here.
+- Install [nexe](https://github.com/nexe/nexe)
+- Run this code and you will get ApexRPC.exe
+```
+nexe main.js -r node_modules/@doctormckay/steam-crypto --target 12.18.2 -o ApexRPC.exe
+```
+
 ## Overview
 
 ApexRPC is a client to convert [Steam Rich Presence](https://partner.steamgames.com/doc/features/enhancedrichpresence) to [Discord Rich Presence](https://discord.com/rich-presence) for Apex Legends, written in Node.js.
