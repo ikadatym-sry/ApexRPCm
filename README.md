@@ -4,7 +4,11 @@ Lobby            |  In-Match
 :-------------------------:|:-------------------------:
 ![](https://user-images.githubusercontent.com/32639831/143062717-b1a8debc-d661-4baa-99d7-320571dd7fef.png)  |  ![](https://user-images.githubusercontent.com/32639831/143062754-fe1106da-a5a0-4393-b336-5b77b74f87cc.png)
 
-# To Compile this project
+## Notes
+- I am always sleepy, so it can have some misspelled or something.
+- Please gently tell me if I have some error(My heart is very fragile).
+
+## To Compile this project
 - Download or clone or something that you can get this project from here.
 - Install [nexe](https://github.com/nexe/nexe)
 - Run this code and you will get ApexRPC.exe
