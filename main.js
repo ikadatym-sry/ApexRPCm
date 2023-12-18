@@ -1,6 +1,7 @@
 /* env */
 require('dotenv').config();
-
+const Server = process.env.PLAYING_ON_SERVER;
+const ShowServer = process.env.Show_Server;
 /* Dependencies */
 const DiscordRPC = require('discord-rpc');
 const SteamUser = require('steam-user');
@@ -232,13 +233,22 @@ SteamClient.on('user', async function(sID, user) {
     }
 
     if (steam_player_group_size) {
-        activity.state = (steam_player_group_size.value > 1) ? "In the party" : "In the party alone";
-        [activity.partySize, activity.partyMax] = [Number(steam_player_group_size.value), 3]; // NOTE: THIS IS HARDCODED
+        if (['yes', 'y', 'true'].includes(ShowServer)) {
+            activity.state = (steam_player_group_size.value > 1) ? `${Server} | In the party` : `${Server} | In the party alone`;
+            [activity.partySize, activity.partyMax] = [Number(steam_player_group_size.value), 3]; // NOTE: THIS IS HARDCODED
+        } else {
+            activity.state = (steam_player_group_size.value > 1) ? `In the party` : `In the party alone`;
+            [activity.partySize, activity.partyMax] = [Number(steam_player_group_size.value), 3];
+        }
     } else {
-        activity.state = `Not joining any party`;
+        if (['yes', 'y', 'true'].includes(ShowServer)) {
+            activity.state = `${Server} | Not joining any party`; // Code to be executed if set true
+        } else {
+            activity.state = `Not joining any party`; // Code to be executed if set false
+        }
     }
-
     await RPC.setActivity(activity);
+    
 });
 
 /* main:RPC */

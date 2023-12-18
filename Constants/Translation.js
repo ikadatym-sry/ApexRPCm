@@ -49,7 +49,14 @@ module.exports = Object.freeze({
     "#control_map_name_barometer": "Barometer",
     "#control_map_name_lab": "Hammond Labs",
     "#control_map_name_caustic": "Caustic Treatment",
+    "#control_map_name_hammond_labs_night": "Hammond Labs Night",
+    "#control_map_name_lava_siphon": "Lava Siphon",
 
     // Free DM
-    "#freedm_map_name_skulltown": "Skull Town"
+    "#freedm_map_name_skulltown": "Skull Town",
+    "#freedm_map_name_estates": "Estates",
+    "#freedm_map_name_estates_night": "Estates Night",
+    "#freedm_map_name_thewall": "The Wall",
+    "#freedm_map_name_fragment": "Fragment East"
+
 });
