@@ -12,7 +12,13 @@ Lobby            |  In-Match
 
 ## To Compile this project
 # (1)
-- Just run "autoja.cmd"
+```
+git clone https://github.com/ikadatym-sry/ApexRPCm.git
+cd ApexRPCm 
+npm i 
+npm run build 
+ApexRPC.exe
+```
 # (2)
 - Download or clone or something so that you can get the project from here.
 - Install [nexe](https://github.com/nexe/nexe)
