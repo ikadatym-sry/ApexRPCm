@@ -26,20 +26,13 @@ ApexRPC.exe
 ```
 nexe -i main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-14.15.3 -o ApexRPC.exe
 ```
-
 If the built executable opens a Node.js prompt like `Welcome to Node.js ...` instead of starting ApexRPC, your build likely did not embed the app entry file. Rebuild using the command above (or run `npm run build`) and replace the old ApexRPC.exe.
-
 ## Overview
-
 ApexRPC is a Discord Rich Presence client for Apex Legends, written in Node.js.
-
 - `GAME_PLATFORM=steam` (default): full mode using [Steam Rich Presence](https://partner.steamgames.com/doc/features/enhancedrichpresence) mapped to [Discord Rich Presence](https://discord.com/rich-presence).
 - `GAME_PLATFORM=ea`: experimental fallback mode using local Apex process detection (limited details).
-
 ## Usage
-
-- Clone this repository or download the latest release from the [releases page](https://github.com/Holfz/ApexRPC/releases)
-- Extract the zip file
+- First warning: Don't send your `.env` file to anyone.
 - Copy the file named `.env.example`, then paste and rename it into `.env`
 - Inside the `.env` file,
    - Set `GAME_PLATFORM=steam` for full rich presence details (map/mode/party from Steam payload).
@@ -80,9 +73,6 @@ https://user-images.githubusercontent.com/32639831/143059780-29ca2bad-4a13-4b61-
 | LOG_RICH_PRESENCE_KEYS   |    ✕     | Log full Steam rich presence payload whenever it changes (debug/troubleshooting). Default is `false`.     |
 
 Notes:
-- Server/region is only shown when `SHOW_SERVER=true`.
-- If auto-detection does not return a value, ApexRPC falls back to `PLAYING_ON_SERVER`.
-- If `ALWAYS_OVERRIDE_DISCORD_ACTIVITY=true`, ApexRPC keeps a fallback activity active while it is running.
 - Steam mode has the highest fidelity (map/mode/match state). EA mode is currently generic due limited public data access.
 
 ## Important Warning
@@ -99,11 +89,7 @@ DON'T send your `.env` file to anyone, even your parent.
 
 ## Final Note
 
-This project has been swinging around inside my PC since Apex Legends SS10 was released, and I was creating it for fun, only using it for a while. So I released it in case someone wanted this.
-
-**Competitive, Arena, Ranked Arena is currently partially supported (I only play public: TRIO). Any PR, Contribution is appreciated.**
-
-**EDIT (12 August 2022): Official Discord Presence is now supported by the game itself, But just hidden. This repo will goes to archive state if official one is shown. (I still happy to maintain this while official one is still hidden)**
+- Lately I'm out from Apex Legends game (I don't even know what season it is as I'm writing this) and I will only update it when I want to do
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
