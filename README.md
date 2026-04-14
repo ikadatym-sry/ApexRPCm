@@ -14,7 +14,7 @@ Lobby            |  In-Match
 - Install [nexe](https://github.com/nexe/nexe)
 - Run this code and you will get ApexRPC.exe
 ```
-nexe -i main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-16.20.2 -o ApexRPC.exe
+nexe -i main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-14.15.3 -o ApexRPC.exe
 ```
 
 If the built executable opens a Node.js prompt like `Welcome to Node.js ...` instead of starting ApexRPC, your build likely did not embed the app entry file. Rebuild using the command above (or run `npm run build`) and replace the old ApexRPC.exe.
