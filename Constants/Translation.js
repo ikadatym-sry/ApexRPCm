@@ -39,7 +39,7 @@ module.exports = Object.freeze({
     "#mp_rr_desertlands_holiday": "Winter Express",
     "#mp_rr_desertlands_holiday_desc": "Winter Express",
     "#mp_rr_olympus_mu1_night": "After Dark",
-    "#mp_rr_divided_moon_mu1_uh": "Wildcard Broken Moon",
+    "#mp_rr_divided_moon_mu1_uh": "Broken Moon",
 
     // Normal Map
     "#mp_rr_canyonlands": "Kings Canyon",
