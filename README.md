@@ -11,6 +11,8 @@ Lobby            |  In-Match
 ![](https://user-images.githubusercontent.com/32639831/143062717-b1a8debc-d661-4baa-99d7-320571dd7fef.png)  |  ![](https://user-images.githubusercontent.com/32639831/143062754-fe1106da-a5a0-4393-b336-5b77b74f87cc.png)
 
 ## To Compile this project
+# (0)
+OK, if you lazy to compile by yourself, you can just download the latest release from [here](https://github.com/ikadatym-sry/ApexRPCm/releases/latest)
 # (1)
 ```
 git clone https://github.com/ikadatym-sry/ApexRPCm.git
@@ -36,7 +38,7 @@ ApexRPC is a Discord Rich Presence client for Apex Legends, written in Node.js.
 - Copy the file named `.env.example`, then paste and rename it into `.env`
 - Inside the `.env` file,
    - Set `GAME_PLATFORM=steam` for full rich presence details (map/mode/party from Steam payload).
-   - Set `GAME_PLATFORM=ea` for experimental process-based mode (no Steam login required).
+   - (NOt tested yet) Set `GAME_PLATFORM=ea` for experimental process-based mode (no Steam login required).
    - If using Steam mode, replace `YOURSTEAMUSERNAME` and `YOURSTEAMPASSWORD` with your Steam account credentials.
 - If you cloned this repo
    - Make sure [Node.js](https://nodejs.org/en/) is installed
