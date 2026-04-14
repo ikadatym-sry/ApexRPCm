@@ -1,15 +1,19 @@
 # ApexRPC
 
-Lobby            |  In-Match
-:-------------------------:|:-------------------------:
-![](https://user-images.githubusercontent.com/32639831/143062717-b1a8debc-d661-4baa-99d7-320571dd7fef.png)  |  ![](https://user-images.githubusercontent.com/32639831/143062754-fe1106da-a5a0-4393-b336-5b77b74f87cc.png)
-
 ## Notes
+- This project is originally created by [Holfz](https://github.com/Holfz/ApexRPC), and I just forked it for my own use, educational, fun, hobby, and smth like that.
 - I am always sleepy, so it can be misspelled or something.
 - Please gently tell me if I have some error(My heart is very fragile).
 - If you are running the program and it not work properly, just try to close and open the program again.(at least it works for me)
 
+Lobby            |  In-Match
+:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/32639831/143062717-b1a8debc-d661-4baa-99d7-320571dd7fef.png)  |  ![](https://user-images.githubusercontent.com/32639831/143062754-fe1106da-a5a0-4393-b336-5b77b74f87cc.png)
+
 ## To Compile this project
+# (1)
+- Just run "autoja.cmd"
+# (2)
 - Download or clone or something so that you can get the project from here.
 - Install [nexe](https://github.com/nexe/nexe)
 - Run this code and you will get ApexRPC.exe
