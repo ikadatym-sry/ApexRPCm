@@ -57,6 +57,9 @@ https://user-images.githubusercontent.com/32639831/143059780-29ca2bad-4a13-4b61-
 | STEAM_PASSWORD           |    ✔*    | Your Steam Password. Required when `GAME_PLATFORM=steam`.                                                  |
 | LOG_LEVEL                |    ✕     | Minimum log level to produce. Values are `debug`, `info`, `silly`, `warn` and `error`. Default is `info`. |
 | DISCORD_CLIENT_ID        |    ✕     | Custom Discord application id. If empty, ApexRPC default id is used.                                     |
+| ALWAYS_OVERRIDE_DISCORD_ACTIVITY | ✕ | If `true`, ApexRPC keeps overriding Discord activity while the app is running, even when Apex is not detected. Default is `false`. |
+| ALWAYS_OVERRIDE_DETAILS  |    ✕     | `details` text used when always-override mode is active and Apex is not detected.                         |
+| ALWAYS_OVERRIDE_STATE    |    ✕     | `state` text used when always-override mode is active and Apex is not detected.                           |
 | LAUNCH_APEX_IF_NECESSARY |    ✕     | If Steam is installed, should ApexRPC launch Apex Legends for you? Default is `false`. Legacy alias: `LAUNCH_APEX_IF_NESSESARY`. |
 | SHOW_SERVER              |    ✕     | Show server/region in Discord state line. Default is `false`. Legacy alias: `Show_Server`.               |
 | AUTO_DETECT_SERVER       |    ✕     | Try to detect server/region from Steam rich presence payload. Default is `true`.                          |
@@ -69,6 +72,7 @@ https://user-images.githubusercontent.com/32639831/143059780-29ca2bad-4a13-4b61-
 Notes:
 - Server/region is only shown when `SHOW_SERVER=true`.
 - If auto-detection does not return a value, ApexRPC falls back to `PLAYING_ON_SERVER`.
+- If `ALWAYS_OVERRIDE_DISCORD_ACTIVITY=true`, ApexRPC keeps a fallback activity active while it is running.
 - Steam mode has the highest fidelity (map/mode/match state). EA mode is currently generic due limited public data access.
 
 ## Important Warning

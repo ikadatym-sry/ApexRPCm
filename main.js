@@ -23,6 +23,7 @@ const RPC = new DiscordRPC.Client({ transport: 'ipc' });
 const appVersion = require('./package.json').version;
 let [discordReady, startTimestamp, playState] = [false, null, 0];
 let [lastRichPresenceDumpSignature, lastDetectedServer] = [null, null];
+const appStartTimestamp = new Date();
 
 const TRUE_VALUES = ['yes', 'y', 'true', '1', 'on'];
 const launchApexIfNecessary = isTruthy(process.env.LAUNCH_APEX_IF_NECESSARY || process.env.LAUNCH_APEX_IF_NESSESARY);
@@ -32,10 +33,14 @@ const logRichPresenceKeys = isTruthy(process.env.LOG_RICH_PRESENCE_KEYS);
 const fallbackServer = readString(process.env.PLAYING_ON_SERVER);
 const gamePlatform = resolvePlatform(process.env.GAME_PLATFORM);
 const discordClientId = readString(process.env.DISCORD_CLIENT_ID) || '893911040713191444';
+const alwaysOverrideDiscordActivity = isTruthy(process.env.ALWAYS_OVERRIDE_DISCORD_ACTIVITY);
+const alwaysOverrideDetails = readString(process.env.ALWAYS_OVERRIDE_DETAILS) || 'ApexRPC is running';
+const alwaysOverrideState = readString(process.env.ALWAYS_OVERRIDE_STATE) || 'Waiting for Apex Legends';
 const eaPollIntervalMs = readPositiveInt(process.env.EA_PROCESS_POLL_INTERVAL_MS, 15000);
 const eaDetailsText = readString(process.env.EA_ACTIVITY_DETAILS) || 'Playing Apex Legends (EA App)';
 const eaStateText = readString(process.env.EA_ACTIVITY_STATE) || 'In game';
 let [eaWatcherHandle, eaApexRunning] = [null, false];
+let steamApexRunning = false;
 
 function isTruthy(value) {
     return TRUE_VALUES.includes(String(value || '').trim().toLowerCase());
@@ -209,6 +214,25 @@ async function clearDiscordActivity(contextTag) {
     }
 }
 
+function isApexRunning() {
+    return gamePlatform === 'ea' ? eaApexRunning : steamApexRunning;
+}
+
+async function applyIdleDiscordActivity(contextTag) {
+    if (!alwaysOverrideDiscordActivity || !discordReady || isApexRunning()) {
+        return;
+    }
+
+    await RPC.setActivity({
+        details: alwaysOverrideDetails,
+        state: buildStateLabel(alwaysOverrideState, fallbackServer),
+        startTimestamp: appStartTimestamp,
+        largeImageKey: 'apex-legends',
+        largeImageText: `ApexRPC v${appVersion}`,
+        instance: false
+    });
+}
+
 async function updateEaActivity(apexProcess) {
     if (!discordReady) {
         return;
@@ -245,13 +269,22 @@ async function refreshEaWatcher() {
     }
 
     if (!isRunning && eaApexRunning) {
-        logger.info('Apex process stopped in EA mode. Clearing Discord activity.', 'main:ea');
-        await clearDiscordActivity('main:ea');
+        logger.info('Apex process stopped in EA mode.', 'main:ea');
+        if (!alwaysOverrideDiscordActivity) {
+            await clearDiscordActivity('main:ea');
+        }
         [startTimestamp, playState] = [null, 0];
     }
 
     eaApexRunning = isRunning;
     if (!isRunning) {
+        if (alwaysOverrideDiscordActivity) {
+            if (!discordReady) {
+                await loginDiscordRpc('main:ea:always_override');
+            } else {
+                await applyIdleDiscordActivity('main:ea:idle');
+            }
+        }
         return;
     }
 
@@ -294,6 +327,10 @@ if (gamePlatform === 'steam') {
 } else {
     logger.info('Platform: EA App (experimental process-based presence).', 'main');
     startEaWatcher();
+    if (alwaysOverrideDiscordActivity) {
+        logger.info('Always override Discord activity is enabled.', 'main:RPC');
+        loginDiscordRpc('main:ea:always_override');
+    }
 }
 
 SteamClient.on('error', function(e) {
@@ -317,6 +354,11 @@ SteamClient.on('steamGuard', async function(domain, callback) {
 SteamClient.on('loggedOn', async function(details) {
     logger.info(`Logged in with steam vanity url: ${details.vanity_url}, Welcome.`, 'main:steam');
     SteamClient.setPersona(SteamUser.EPersonaState.Online);
+
+    if (alwaysOverrideDiscordActivity) {
+        logger.info('Always override Discord activity is enabled.', 'main:RPC');
+        loginDiscordRpc('main:steam:always_override');
+    }
 
     if (!launchApexIfNecessary) {
         logger.debug('`LAUNCH_APEX_IF_NECESSARY` env is not set.', 'main:steam');
@@ -348,12 +390,20 @@ SteamClient.on('loggedOn', async function(details) {
 });
 
 SteamClient.on('playingState', function(blocked, playingApp) {
+    steamApexRunning = playingApp == 1172470;
+
     if (playingApp == 1172470) {
         logger.info(`Seems you started to playing Apex Legends (AppID: ${playingApp}), Firing up DiscordRPC.`, 'main:steam');
         loginDiscordRpc('main:steam');
     } else {
-        logger.info(`Seems you stopped to playing Apex Legends (AppID: ${playingApp}), Clearing Discord activity.`, 'main:steam');
-        clearDiscordActivity('main:steam');
+        logger.info(`Seems you stopped to playing Apex Legends (AppID: ${playingApp}).`, 'main:steam');
+        if (alwaysOverrideDiscordActivity) {
+            applyIdleDiscordActivity('main:steam:idle').catch((error) => {
+                logger.warn(`Failed to apply idle Discord activity: ${error.message}`, 'main:steam');
+            });
+        } else {
+            clearDiscordActivity('main:steam');
+        }
         [startTimestamp, playState] = [null, 0];
     }
 });
@@ -510,6 +560,12 @@ SteamClient.on('user', async function(sID, user) {
 RPC.on('ready', () => {
     logger.info('Discord RPC is ready.', 'main:RPC');
     discordReady = true;
+
+    if (alwaysOverrideDiscordActivity) {
+        applyIdleDiscordActivity('main:RPC:ready').catch((error) => {
+            logger.warn(`Failed to apply idle Discord activity: ${error.message}`, 'main:RPC');
+        });
+    }
 
     if (gamePlatform === 'ea') {
         refreshEaWatcher().catch((error) => {
