@@ -57,6 +57,7 @@ module.exports = Object.freeze({
     "#mp_rr_arena_skygarden": "Encore",
     "#mp_rr_arena_composite": "Drop-Off",
     "#mp_rr_arena_habitat": "Habitat 4",
+    "#mp_rr_freedm_map_name_the_core": "The Core",
 
     // Control Map
     "#control_map_name_barometer": "Barometer",
@@ -75,6 +76,10 @@ module.exports = Object.freeze({
     "#freedm_map_name_fragment": "Fragment East",
     "#freedm_map_name_thunderdome": "Thunderdome",
     "#freedm_map_name_monument": "Monument",
-    "#freedm_map_name_fragment_west": "Fragment West"
+    "#freedm_map_name_fragment_west": "Fragment West",
+    "#freedm_map_name_estates": "Estates",
+    "#freedm_map_name_dome": "Phase Runner",
+    "#freedm_map_name_wattson": "Wattson's Pylon",
+    "#freedm_map_name_amps": "ZEUS Station",
 
 });
