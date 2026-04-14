@@ -1,20 +1,24 @@
 {
   "name": "apexrpc",
-  "version": "1.0.8",
-  "description": "RPC client for Apex Legends. (Steam Required)",
+  "version": "1.1.0",
+  "description": "RPC client for Apex Legends (Steam full mode + EA experimental mode)",
   "main": "main.js",
+  "engines": {
+    "node": ">=16.20"
+  },
   "dependencies": {
     "discord-rpc": "^4.0.1",
-    "dotenv": "^10.0.0",
-    "protobufjs":"^7.2.4",
-    "find-process": "^1.4.7",
+    "dotenv": "^16.6.1",
+    "protobufjs": "^7.5.4",
+    "find-process": "^1.4.11",
     "prompts": "^2.4.2",
-    "steam-user": "^4.20.2",
-    "winreg": "^1.2.4",
-    "winston": "^3.7.2"
+    "steam-user": "^4.29.3",
+    "winreg": "^1.2.5",
+    "winston": "^3.19.0"
   },
   "scripts": {
-    "build": "nexe main.js -r node_modules/@doctormckay/steam-crypto --target 12.18.2 -o ApexRPC.exe"
+    "start": "node main.js",
+    "build": "nexe main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-16.20.2 -o ApexRPC.exe"
   },
   "repository": {
     "type": "git",

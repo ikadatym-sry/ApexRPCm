@@ -15,6 +15,14 @@ module.exports = Object.freeze({
     "#GAMEMODE_ARENAS_RANKED": "RANKED ARENAS",
     "#GAME_MODE_CONTROL": "CONTROL",
     "#GAME_MODE_GUNGAME": "GUN GAME",
+    "#GAME_MODE_GUNRUN": "GUN RUN",
+    "#GAME_MODE_LOCKDOWN": "LOCKDOWN",
+    "#PL_MIXTAPE": "MIXTAPE",
+    "#PL_SOLOS": "SOLOS",
+    "#PL_REVIVAL": "REVIVAL",
+    "#PL_THREESTRIKES": "THREE STRIKES",
+    "#PL_STRAIGHTSHOT": "STRAIGHT SHOT",
+    "#PL_RUMBLE": "RUMBLE",
     "#PL_RANKED_LEAGUES": "RANKED LEAGUES",
     "#TDM_NAME": "TEAM DEATHMATCH",
     "#PL_DUO_DATE": "DATE NIGHT",
@@ -36,6 +44,7 @@ module.exports = Object.freeze({
     "#mp_rr_olympus": "Olympus",
     "#mp_rr_tropic_island": "Storm Point",
     "#mp_rr_divided_moon": "Broken Moon",
+    "#mp_rr_district": "E-District",
 
     // Arena Map
     "#mp_rr_arena_phase_runner": "Phase Runner",
@@ -51,12 +60,17 @@ module.exports = Object.freeze({
     "#control_map_name_caustic": "Caustic Treatment",
     "#control_map_name_hammond_labs_night": "Hammond Labs Night",
     "#control_map_name_lava_siphon": "Lava Siphon",
+    "#control_map_name_thunderdome": "Thunderdome",
+    "#control_map_name_production_yard": "Production Yard",
 
     // Free DM
     "#freedm_map_name_skulltown": "Skull Town",
     "#freedm_map_name_estates": "Estates",
     "#freedm_map_name_estates_night": "Estates Night",
     "#freedm_map_name_thewall": "The Wall",
-    "#freedm_map_name_fragment": "Fragment East"
+    "#freedm_map_name_fragment": "Fragment East",
+    "#freedm_map_name_thunderdome": "Thunderdome",
+    "#freedm_map_name_monument": "Monument",
+    "#freedm_map_name_fragment_west": "Fragment West"
 
 });
