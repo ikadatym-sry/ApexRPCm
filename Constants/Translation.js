@@ -7,7 +7,7 @@ module.exports = Object.freeze({
     "#RICHPRESENCE_PARTY_LOBBY_N_N": "Chilling in the Lobby...",
     "#RICHPRESENCE_PARTY_LOBBY": "Chilling in the Lobby...",
 
-    // Game Mode
+    // Game Mode | in debug, gamemode=
     "#PL_TRIO": "TRIOS",
     "#PL_DUO": "DUOS",
     "#PL_Ranked_Leagues": "RANKED LEAGUES",
@@ -29,11 +29,11 @@ module.exports = Object.freeze({
     "#PL_TRAINING": "In the training",
     "#LOADINGSCREEN": "Loading into the battle",
     "#MAINMENU": "In the Main Menu",
-    "#temp": "Wildcard",
     "#PL_TITLE_UNHINGED": "Wildcard",
+    "#CASUAL_TRIOS_HEADER": "Bot Royale",
 
     // Map Level
-    // Event Map
+    // Event Map | in debug, level=
     "#mp_rr_canyonlands_mu1_night": "Shadow Royale",
     "#mp_rr_canyonlands_mu1_night_desc": "Shadow Royale",
     "#mp_rr_desertlands_holiday": "Winter Express",

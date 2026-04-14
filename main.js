@@ -42,6 +42,28 @@ const eaStateText = readString(process.env.EA_ACTIVITY_STATE) || 'In game';
 let [eaWatcherHandle, eaApexRunning] = [null, false];
 let steamApexRunning = false;
 
+async function bootstrapSteamPresenceIfApexAlreadyRunning() {
+    const apexProcesses = await find('name', 'r5apex', true);
+    steamApexRunning = apexProcesses.length > 0;
+
+    if (!steamApexRunning) {
+        return;
+    }
+
+    logger.info('Detected Apex process before ApexRPC startup. Bootstrapping Discord presence.', 'main:steam');
+    await loginDiscordRpc('main:steam:bootstrap');
+
+    if (!SteamClient.steamID) {
+        return;
+    }
+
+    try {
+        await SteamClient.getPersonas([SteamClient.steamID.getSteamID64()]);
+    } catch (error) {
+        logger.debug(`Failed to refresh self persona during bootstrap: ${error.message}`, 'main:steam');
+    }
+}
+
 function isTruthy(value) {
     return TRUE_VALUES.includes(String(value || '').trim().toLowerCase());
 }
@@ -354,6 +376,10 @@ SteamClient.on('steamGuard', async function(domain, callback) {
 SteamClient.on('loggedOn', async function(details) {
     logger.info(`Logged in with steam vanity url: ${details.vanity_url}, Welcome.`, 'main:steam');
     SteamClient.setPersona(SteamUser.EPersonaState.Online);
+
+    bootstrapSteamPresenceIfApexAlreadyRunning().catch((error) => {
+        logger.warn(`Steam startup bootstrap failed: ${error.message}`, 'main:steam');
+    });
 
     if (alwaysOverrideDiscordActivity) {
         logger.info('Always override Discord activity is enabled.', 'main:RPC');
