@@ -14,7 +14,7 @@ Lobby            |  In-Match
 - Install [nexe](https://github.com/nexe/nexe)
 - Run this code and you will get ApexRPC.exe
 ```
-nexe main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-16.20.2 -o ApexRPC.exe
+nexe main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-14.5.0 -o ApexRPC.exe
 ```
 
 ## Overview
