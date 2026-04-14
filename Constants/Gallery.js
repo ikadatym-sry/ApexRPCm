@@ -9,6 +9,7 @@ module.exports = Object.freeze({
     "#mp_rr_desertlands_holiday": "winter-express",
     "#mp_rr_desertlands_holiday_desc": "winter-express",
     "#mp_rr_olympus_mu1_night": "olympus-after-dark",
+    "#mp_rr_divided_moon_mu1_uh": "https://github.com/ikadatym-sry/ApexRPCpics/blob/main/test1.PNG",
 
     // Normal Map
     "#mp_rr_canyonlands": "kings-canyon",
