@@ -14,12 +14,17 @@ Lobby            |  In-Match
 - Install [nexe](https://github.com/nexe/nexe)
 - Run this code and you will get ApexRPC.exe
 ```
-nexe main.js -r node_modules/@doctormckay/steam-crypto --target 12.18.2 -o ApexRPC.exe
+nexe -i main.js -r node_modules/@doctormckay/steam-crypto --target windows-x64-14.15.3 -o ApexRPC.exe
 ```
+
+If the built executable opens a Node.js prompt like `Welcome to Node.js ...` instead of starting ApexRPC, your build likely did not embed the app entry file. Rebuild using the command above (or run `npm run build`) and replace the old ApexRPC.exe.
 
 ## Overview
 
-ApexRPC is a client to convert [Steam Rich Presence](https://partner.steamgames.com/doc/features/enhancedrichpresence) to [Discord Rich Presence](https://discord.com/rich-presence) for Apex Legends, written in Node.js.
+ApexRPC is a Discord Rich Presence client for Apex Legends, written in Node.js.
+
+- `GAME_PLATFORM=steam` (default): full mode using [Steam Rich Presence](https://partner.steamgames.com/doc/features/enhancedrichpresence) mapped to [Discord Rich Presence](https://discord.com/rich-presence).
+- `GAME_PLATFORM=ea`: experimental fallback mode using local Apex process detection (limited details).
 
 ## Usage
 
@@ -27,12 +32,13 @@ ApexRPC is a client to convert [Steam Rich Presence](https://partner.steamgames.
 - Extract the zip file
 - Copy the file named `.env.example`, then paste and rename it into `.env`
 - Inside the `.env` file,
-   - Replace `YOURSTEAMUSERNAME` with your Steam Username.
-   - Replace `YOURSTEAMPASSWORD` with your Steam Password. 
+   - Set `GAME_PLATFORM=steam` for full rich presence details (map/mode/party from Steam payload).
+   - Set `GAME_PLATFORM=ea` for experimental process-based mode (no Steam login required).
+   - If using Steam mode, replace `YOURSTEAMUSERNAME` and `YOURSTEAMPASSWORD` with your Steam account credentials.
 - If you cloned this repo
    - Make sure [Node.js](https://nodejs.org/en/) is installed
    - Open your command-line interface
-   - Do an `npm install`
+   - Do an `npm ci`
    - Run `node main.js`
 - If you've downloaded the released executables
    - Run `ApexRPC.exe`
@@ -46,10 +52,28 @@ https://user-images.githubusercontent.com/32639831/143059780-29ca2bad-4a13-4b61-
 ### Environment variables (.env)
 | Parameter                | Required | Description                                                                                               |
 |--------------------------|:--------:|-----------------------------------------------------------------------------------------------------------|
-| STEAM_USERNAME           |    ✔     | Your Steam Username                                                                                       |
-| STEAM_PASSWORD           |    ✔     | Your Steam Password                                                                                       |
+| GAME_PLATFORM            |    ✕     | `steam` (default, full mode) or `ea` (experimental mode).                                                 |
+| STEAM_USERNAME           |    ✔*    | Your Steam Username. Required when `GAME_PLATFORM=steam`.                                                  |
+| STEAM_PASSWORD           |    ✔*    | Your Steam Password. Required when `GAME_PLATFORM=steam`.                                                  |
 | LOG_LEVEL                |    ✕     | Minimum log level to produce. Values are `debug`, `info`, `silly`, `warn` and `error`. Default is `info`. |
-| LAUNCH_APEX_IF_NESSESARY |    ✕     | If Steam is installed. Should ApexRPC launch Apex Legends for you?. Default is `false`.                   |
+| DISCORD_CLIENT_ID        |    ✕     | Custom Discord application id. If empty, ApexRPC default id is used.                                     |
+| ALWAYS_OVERRIDE_DISCORD_ACTIVITY | ✕ | If `true`, ApexRPC keeps overriding Discord activity while the app is running, even when Apex is not detected. Default is `false`. |
+| ALWAYS_OVERRIDE_DETAILS  |    ✕     | `details` text used when always-override mode is active and Apex is not detected.                         |
+| ALWAYS_OVERRIDE_STATE    |    ✕     | `state` text used when always-override mode is active and Apex is not detected.                           |
+| LAUNCH_APEX_IF_NECESSARY |    ✕     | If Steam is installed, should ApexRPC launch Apex Legends for you? Default is `false`. Legacy alias: `LAUNCH_APEX_IF_NESSESARY`. |
+| SHOW_SERVER              |    ✕     | Show server/region in Discord state line. Default is `false`. Legacy alias: `Show_Server`.               |
+| AUTO_DETECT_SERVER       |    ✕     | Try to detect server/region from Steam rich presence payload. Default is `true`.                          |
+| PLAYING_ON_SERVER        |    ✕     | Fallback server label if auto-detection is not available (example: `Singapore`).                          |
+| EA_PROCESS_POLL_INTERVAL_MS | ✕     | Poll interval for Apex process checks in EA mode. Default is `15000`.                                     |
+| EA_ACTIVITY_DETAILS      |    ✕     | Discord `details` text used in EA mode.                                                                    |
+| EA_ACTIVITY_STATE        |    ✕     | Discord `state` text used in EA mode.                                                                      |
+| LOG_RICH_PRESENCE_KEYS   |    ✕     | Log full Steam rich presence payload whenever it changes (debug/troubleshooting). Default is `false`.     |
+
+Notes:
+- Server/region is only shown when `SHOW_SERVER=true`.
+- If auto-detection does not return a value, ApexRPC falls back to `PLAYING_ON_SERVER`.
+- If `ALWAYS_OVERRIDE_DISCORD_ACTIVITY=true`, ApexRPC keeps a fallback activity active while it is running.
+- Steam mode has the highest fidelity (map/mode/match state). EA mode is currently generic due limited public data access.
 
 ## Important Warning
 
