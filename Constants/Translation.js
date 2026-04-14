@@ -29,8 +29,9 @@ module.exports = Object.freeze({
     "#PL_TRAINING": "In the training",
     "#LOADINGSCREEN": "Loading into the battle",
     "#MAINMENU": "In the Main Menu",
+    "#BOTPLAYGROUND_BOT_ROYALE_HEADER": "Bot Royale",
     "#PL_TITLE_UNHINGED": "Wildcard",
-    "#CASUAL_TRIOS_HEADER": "Bot Royale",
+    "#CASUAL_TRIOS_HEADER": "Evolved Bot Royale",
 
     // Map Level
     // Event Map | in debug, level=
