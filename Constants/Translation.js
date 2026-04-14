@@ -30,8 +30,7 @@ module.exports = Object.freeze({
     "#LOADINGSCREEN": "Loading into the battle",
     "#MAINMENU": "In the Main Menu",
     "#temp": "Wildcard",
-    "#RICHPRESENCE_PLAYING_MULTIPLAYER_SHORT": "Event",
-    "#PL_TITLE_UNHINGED": "Event",
+    "#PL_TITLE_UNHINGED": "Wildcard",
 
     // Map Level
     // Event Map
