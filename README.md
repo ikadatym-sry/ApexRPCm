@@ -38,7 +38,7 @@ ApexRPC is a Discord Rich Presence client for Apex Legends, written in Node.js.
 - If you cloned this repo
    - Make sure [Node.js](https://nodejs.org/en/) is installed
    - Open your command-line interface
-   - Do an `npm install`
+   - Do an `npm ci`
    - Run `node main.js`
 - If you've downloaded the released executables
    - Run `ApexRPC.exe`
